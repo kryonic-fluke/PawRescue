@@ -47,11 +47,11 @@ PawRescue is a comprehensive platform connecting animal lovers with rescue organ
 
 npm install
 
-# or
+## or
 
 yarn install
 
-# Set up environment variables
+## Set up environment variables
 
 cp .env.example .env
 
@@ -127,7 +127,7 @@ pawrescue/
 
 Environment Variables:
 
-Create a .env file in the root directory with the following variables:
+- Create a .env file in the root directory with the following variables:
 
 .env
 
@@ -178,57 +178,57 @@ GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 
 
-📦 Scripts
--dev - Start development server
--build - Build for production
--start - Start production server
--test - Run tests
--lint - Run linter
--format - Format code with Prettier
--db:migrate - Run database migrations
--db:seed - Seed database with test data
+# 📦 Scripts
+- dev - Start development server
+- build - Build for production
+- start - Start production server
+- test - Run tests
+- lint - Run linter
+- format - Format code with Prettier
+- db:migrate - Run database migrations
+- db:seed - Seed database with test data
 
 
-🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-Frontend:
+## Frontend:
 
--React 18
--TypeScript
--Vite
--Tailwind CSS
--React Query
--React Hook Form
--React Router
--Framer Motion (animations)
--React Icons
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Query
+- React Hook Form
+- React Router
+- Framer Motion (animations)
+- React Icons
 
-Backend:
+## Backend:
 
--Node.js
--Express
--PostgreSQL
--Drizzle ORM
--JWT Authentication
--Zod (validation)
--DevOps
--GitHub Actions (CI/CD)
--Docker
--AWS S3 (file storage)
--Vercel (deployment)
+- Node.js
+- Express
+- PostgreSQL
+- Drizzle ORM
+- JWT Authentication
+- Zod (validation)
+- DevOps
+- GitHub Actions (CI/CD)
+- Docker
+- AWS S3 (file storage)
+- Vercel (deployment)
 
 
-# 📝 API Documentation
+## 📝 API Documentation
 
 API documentation is available at /api-docs when running the development server.
 
 
-# 🤝 Contributing
+## 🤝 Contributing
 
 We welcome contributions! Please read our Contributing Guide to get started.
 
 
-# Fork the repository
+## Fork the repository
 
 Create a feature branch (git checkout -b feature/amazing-feature)
 
@@ -239,12 +239,12 @@ Push to the branch (git push origin feature/amazing-feature)
 Open a Pull Request
 
 
-# 📄 License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-# 🙏 Acknowledgments
+## 🙏 Acknowledgments
 
 Drizzle ORM - For the awesome TypeScript ORM
 
