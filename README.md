@@ -1,7 +1,6 @@
 # 🐾 PawRescue - Animal Rescue and Adoption Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://github.com/yourusername/pawrescue/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/pawrescue/actions)
 [![Code Coverage](https://codecov.io/gh/yourusername/pawrescue/branch/main/graph/badge.svg)](https://codecov.io/gh/yourusername/pawrescue)
 
 PawRescue is a comprehensive platform connecting animal lovers with rescue organizations, shelters, and pets in need of forever homes. Our mission is to make pet adoption and animal rescue more accessible, transparent, and efficient.
@@ -44,23 +43,25 @@ PawRescue is a comprehensive platform connecting animal lovers with rescue organ
    git clone [https://github.com/yourusername/pawrescue.git](https://github.com/yourusername/pawrescue.git)
    cd pawrescue
 
-Install dependencies
-bash
+# Install dependencies
 npm install
+
 # or
 yarn
 Set up environment variables
 bash
 cp .env.example .env
+
 # Update the .env file with your configuration
 Set up database
-bash
+
 # Run database migrations
 npm run db:migrate
+
 # Seed initial data (optional)
 npm run db:seed
 Start the development server
-bash
+
 # Start frontend and backend
 npm run dev
 
@@ -90,12 +91,12 @@ pawrescue/
 └── tests/                   # Test files
 
 🔧 Configuration
+
 Environment Variables
-Create a 
-.env
- file in the root directory with the following variables:
+Create a .env file in the root directory with the following variables:
 
 env
+
 # Application
 NODE_ENV=development
 PORT=3000
