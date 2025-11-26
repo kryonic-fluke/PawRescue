@@ -1,0 +1,227 @@
+{
+  "nav": {
+    "home": "Home",
+    "report": "Report Emergency",
+    "adopt": "Adopt",
+    "map": "Live Map",
+    "messages": "Messages",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "home": {
+    "welcome": "Welcome, {{name}}!",
+    "welcomeBack": "Glad to have you back! Ready to help animals today?",
+    "signInPrompt": {
+      "prefix": "Please",
+      "link": "Sign In",
+      "suffix": "for full access"
+    },
+    "hero": {
+      "title": "Every Animal Deserves a",
+      "subtitle": "Second Chance",
+      "description": "Connect rescuers, shelters, and animal lovers in one platform. Report emergencies, find adoptable pets, and help build a community that saves lives every day.",
+      "reportBtn": "Report Emergency",
+      "adoptBtn": "Find a Pet",
+      "heroImageAlt": "PawRescue hero image showing happy rescued animals"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "PawRescue connects distressed animals with those who can help—through real-time rescue coordination, adoptions, and community care."
+    },
+    "emergency": "Emergency",
+    "active": "Active",
+    "community": "Community",
+    "cities": "Cities",
+    "location": "Delhi, India",
+    "rescueActive": "Rescue Operations Active",
+    "emergencyResponse": "24/7 Emergency Response",
+    "timeAndCalendar": "Live Time & Calendar",
+    "openCalendar": "Open Calendar & Events",
+    "platformFeatures": "Platform Features",
+    "dashboard": "My Dashboard",
+    "features": {
+      "title": "How PawRescue Works",
+      "description": "Our platform connects all stakeholders in animal rescue and adoption, creating a seamless experience that saves time and lives.",
+      "reporting": {
+        "title": "Report with Photos",
+        "description": "Upload photos and precise location of animals in need of rescue",
+        "shortDescription": "Share photos + GPS"
+      },
+      "alerts": {
+        "title": "Real-time Alerts",
+        "description": "NGOs and rescuers get instant notifications for emergency cases",
+        "shortDescription": "Real-time notifications"
+      },
+      "adoption": {
+        "title": "Find Your Match",
+        "description": "Browse detailed profiles of animals ready for loving homes",
+        "shortDescription": "Find your pet"
+      },
+      "messaging": {
+        "title": "Direct Communication",
+        "description": "Chat directly with shelters and NGOs about adoptions",
+        "shortDescription": "Chat with NGOs"
+      }
+    },
+    "calendar": {
+      "title": "Calendar & Events",
+      "selectedDate": "Selected: {{date}}",
+      "eventTitle": "Event Title",
+      "eventTitlePlaceholder": "Meeting / Visit / Rescue...",
+      "eventNote": "Event Note",
+      "eventNotePlaceholder": "Write event details...",
+      "savedEvent": "Saved Event"
+    },
+    "cta": {
+      "title": "Ready to Make a Difference?",
+      "description": "Join our mission. Report emergencies, adopt pets, or collaborate as an NGO.",
+      "report": "Start Reporting",
+      "ngo": "NGO Partnership",
+      "adopt": "Adopt Today"
+    }
+  },
+  "stats": {
+    "rescued": "Animals Rescued",
+    "adoptions": "Successful Adoptions",
+    "ngos": "Partner NGOs",
+    "cities": "Cities Covered"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Customize your PawRescue experience and manage your account preferences",
+    "account": "Account",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "appearance": "Appearance",
+    "data": "Data",
+    "theme": "Theme",
+    "language": "Language",
+    "timezone": "Timezone",
+    "save": "Save Changes",
+    "export": "Export Data",
+    "manageNotifications": "Manage your notification preferences",
+    "emailNotifications": "Email Notifications",
+    "pushNotifications": "Push Notifications",
+    "adoptionAlerts": "Adoption Alerts",
+    "rescueUpdates": "Rescue Updates",
+    "newsletter": "Newsletter",
+    "dangerZone": "Danger Zone",
+    "dangerZoneDesc": "These actions are irreversible",
+    "deleteAccount": "Delete Account"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "uploading": "Uploading...",
+    "user": "User",
+    "viewDetails": "View Details",
+    "friend": "Friend"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Create Account",
+    "logout": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Full Name",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "createAccount": "Create one now",
+    "signInHere": "Sign in here"
+  },
+  "examples": {
+    "translation": {
+      "title": "Translation Example",
+      "description": "This component demonstrates how to use the translation system.",
+      "simpleExample": "Simple Translation:",
+      "withVariables": "With Variables:",
+      "welcomeMessage": "Welcome, {{name}}!"
+    }
+  },
+  "messages": {
+    "title": "Messages",
+    "search": "Search contacts...",
+    "newChat": "New Chat",
+    "selectChat": "Select a contact to start messaging",
+    "typeMessage": "Type a message...",
+    "send": "Send"
+  },
+  "adoption": {
+    "title": "Find Your Perfect Pet",
+    "available": "Available for Adoption",
+    "apply": "Apply to Adopt",
+    "contact": "Contact Shelter",
+    "learnMore": "Learn More"
+  },
+  "report": {
+    "title": "Report Animal Emergency",
+    "description": "Help us rescue animals in distress",
+    "location": "Location",
+    "photos": "Upload Photos",
+    "submit": "Submit Report"
+  },
+  "notification": {
+    "success": "Success!",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info",
+    "savedEvent": "Event saved to calendar!"
+  },
+  "profile": {
+    "title": "Profile",
+    "noBio": "No bio provided",
+    "animalsHelped": "helped",
+    "adopted": "adopted",
+    "editProfile": "Edit Profile",
+    "personalInfo": "Personal Information",
+    "phone": "Phone",
+    "phonePlaceholder": "Enter your phone number",
+    "location": "Location",
+    "locationPlaceholder": "Enter your location",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
+    "updateSuccess": "Profile updated successfully",
+    "changeAvatar": "Change profile picture",
+    "changeProfilePicture": "Change Profile Picture",
+    "uploadPhoto": "Upload Photo",
+    "takePhoto": "Take Photo",
+    "cameraPreview": "Camera preview",
+    "removePhoto": "Remove Photo",
+    "avatarUpdateSuccess": "Profile picture updated!",
+    "avatarRemoved": "Profile picture removed",
+    "tabs": {
+      "profile": "Profile",
+      "activity": "Activity",
+      "achievements": "Badges",
+      "pets": "Pets",
+      "preferences": "Settings"
+    },
+    "recentActivity": "Recent Activity",
+    "badges": "Badges & Achievements",
+    "myPets": "My Adopted Pets",
+    "addPet": "Add Pet",
+    "adoptedOn": "Adopted on",
+    "noPetsYet": "No adopted pets yet",
+    "adoptPetMessage": "Adopt a pet and give them a forever home!",
+    "browsePets": "Browse Pets",
+    "activity": {
+      "reportedinjureddog": "Reported injured dog",
+      "donatedtoanimalshelter": "Donated to animal shelter",
+      "adoptedacat": "Adopted a cat"
+    },
+    "locations": {
+      "LodhiGarden": "Lodhi Garden",
+      "FriendicoesSECA": "Friendicoes SECA",
+      "SanjayGandhiAnimalCareCentre": "Sanjay Gandhi Animal Care Centre"
+    }
+  }
+}

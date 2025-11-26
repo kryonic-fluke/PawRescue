@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "home": "होम",
+    "report": "आपातकाल रिपोर्ट करें",
+    "adopt": "गोद लें",
+    "map": "लाइव मैप",
+    "messages": "संदेश",
+    "profile": "प्रोफाइल",
+    "settings": "सेटिंग्स"
+  },
+  "home": {
+    "welcome": "आपका स्वागत है, {{name}}!",
+    "welcomeBack": "आपको वापस देखकर खुशी हुई! क्या आज जानवरों की मदद करने के लिए तैयार हैं?",
+    "hero": {
+      "title": "हर जानवर का हक़ है",
+      "subtitle": "एक नई जिंदगी का",
+      "description": "बचावकर्ताओं, आश्रयों और जानवरों से प्यार करने वालों को एक मंच पर जोड़ें। आपात स्थिति की रिपोर्ट करें, गोद लेने योग्य पालतू जानवरों को खोजें और एक ऐसे समुदाय का निर्माण करने में मदद करें जो हर दिन जानवरों की जान बचाता है।",
+      "reportBtn": "आपातकाल रिपोर्ट करें",
+      "adoptBtn": "पालतू खोजें"
+    },
+    "features": {
+      "title": "पॉ रेस्क्यू कैसे काम करता है",
+      "description": "हमारा मंच जानवरों के बचाव और गोद लेने में शामिल सभी हितधारकों को जोड़ता है, जिससे एक सहज अनुभव मिलता है जो समय और जान बचाता है।"
+    }
+  },
+  "stats": {
+    "rescued": "बचाए गए जानवर",
+    "adoptions": "सफल गोद लेने",
+    "ngos": "साझेदार एनजीओ",
+    "cities": "शहर कवर किए गए"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "subtitle": "अपना पॉ रेस्क्यू अनुभव अनुकूलित करें और अपनी खाता प्राथमिकताएं प्रबंधित करें",
+    "account": "खाता",
+    "notifications": "सूचनाएं",
+    "privacy": "गोपनीयता",
+    "appearance": "दिखावट",
+    "data": "डेटा",
+    "theme": "थीम",
+    "language": "भाषा",
+    "timezone": "समय क्षेत्र",
+    "save": "परिवर्तन सहेजें",
+    "export": "डेटा निर्यात करें"
+  },
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "submit": "जमा करें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर"
+  },
+  "auth": {
+    "login": "साइन इन",
+    "register": "खाता बनाएं",
+    "logout": "साइन आउट",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "confirmPassword": "पासवर्ड की पुष्टि करें",
+    "name": "पूरा नाम",
+    "rememberMe": "मुझे याद रखें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "noAccount": "खाता नहीं है?",
+    "hasAccount": "क्या आपका पहले से खाता है?",
+    "createAccount": "अभी बनाएं",
+    "signInHere": "यहां साइन इन करें"
+  },
+  "examples": {
+    "translation": {
+      "title": "अनुवाद उदाहरण",
+      "description": "यह घटक अनुवाद प्रणाली का उपयोग करने का तरीका दिखाता है।",
+      "simpleExample": "सरल अनुवाद:",
+      "withVariables": "चर के साथ:",
+      "welcomeMessage": "स्वागत है, {{name}}!"
+    }
+  },
+  "messages": {
+    "title": "संदेश",
+    "search": "संपर्क खोजें...",
+    "newChat": "नई चैट",
+    "selectChat": "संदेश भेजने के लिए एक संपर्क चुनें",
+    "typeMessage": "संदेश लिखें...",
+    "send": "भेजें"
+  },
+  "adoption": {
+    "title": "अपना आदर्श पालतू खोजें",
+    "available": "गोद लेने के लिए उपलब्ध",
+    "apply": "गोद लेने के लिए आवेदन करें",
+    "contact": "आश्रय से संपर्क करें",
+    "learnMore": "और जानें"
+  },
+  "report": {
+    "title": "पशु आपात स्थिति की रिपोर्ट करें",
+    "description": "संकट में फंसे जानवरों को बचाने में हमारी मदद करें",
+    "location": "स्थान",
+    "photos": "तस्वीरें अपलोड करें",
+    "submit": "रिपोर्ट जमा करें"
+  },
+  "notification": {
+    "success": "सफलता!",
+    "error": "त्रुटि",
+    "warning": "चेतावनी",
+    "info": "जानकारी"
+  },
+  "profile": {
+    "title": "प्रोफाइल",
+    "noBio": "कोई जीवनी उपलब्ध नहीं",
+    "animalsHelped": "की मदद की",
+    "adopted": "गोद लिए गए",
+    "editProfile": "प्रोफाइल संपादित करें",
+    "personalInfo": "व्यक्तिगत जानकारी",
+    "phone": "फ़ोन",
+    "phonePlaceholder": "अपना फ़ोन नंबर दर्ज करें",
+    "location": "स्थान",
+    "locationPlaceholder": "अपना स्थान दर्ज करें",
+    "bio": "जीवनी",
+    "bioPlaceholder": "हमें अपने बारे में बताएं...",
+    "updateSuccess": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई",
+    "changeAvatar": "प्रोफाइल चित्र बदलें",
+    "changeProfilePicture": "प्रोफाइल चित्र बदलें",
+    "uploadPhoto": "फोटो अपलोड करें",
+    "takePhoto": "फोटो खींचें",
+    "cameraPreview": "कैमरा पूर्वावलोकन",
+    "removePhoto": "फोटो हटाएं",
+    "avatarUpdateSuccess": "प्रोफाइल चित्र अपडेट किया गया!",
+    "avatarRemoved": "प्रोफाइल चित्र हटा दिया गया",
+    "tabs": {
+      "profile": "प्रोफाइल",
+      "activity": "गतिविधि",
+      "achievements": "बैज",
+      "pets": "पालतू जानवर",
+      "preferences": "सेटिंग्स"
+    },
+    "recentActivity": "हाल की गतिविधियाँ",
+    "badges": "बैज और उपलब्धियाँ",
+    "myPets": "मेरे गोद लिए गए पालतू जानवर",
+    "addPet": "पालतू जोड़ें",
+    "adoptedOn": "को गोद लिया गया",
+    "noPetsYet": "अभी तक कोई पालतू जानवर नहीं",
+    "adoptPetMessage": "एक पालतू जानवर को गोद लें और उसे हमेशा के लिए घर दें!",
+    "browsePets": "पालतू जानवर देखें",
+    "activity": {
+      "reportedinjureddog": "घायल कुत्ते की रिपोर्ट की",
+      "donatedtoanimalshelter": "पशु आश्रय को दान दिया",
+      "adoptedacat": "एक बिल्ली को गोद लिया"
+    },
+    "locations": {
+      "LodhiGarden": "लोधी गार्डन",
+      "FriendicoesSECA": "फ्रेंडिकोज सेका",
+      "SanjayGandhiAnimalCareCentre": "संजय गांधी पशु देखभाल केंद्र"
+    }
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "notifications": "सूचनाएं",
+    "manageNotifications": "अपनी सूचना प्राथमिकताएं प्रबंधित करें",
+    "emailNotifications": "ईमेल सूचनाएं",
+    "pushNotifications": "पुश सूचनाएं",
+    "adoptionAlerts": "गोद लेने की सूचनाएं",
+    "rescueUpdates": "बचाव अपडेट",
+    "newsletter": "न्यूज़लेटर",
+    "dangerZone": "खतरा क्षेत्र",
+    "dangerZoneDesc": "ये कार्रवाइयां अपरिवर्तनीय हैं",
+    "deleteAccount": "खाता हटाएं"
+  },
+  "common": {
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "uploading": "अपलोड हो रहा है...",
+    "user": "उपयोगकर्ता",
+    "viewDetails": "विवरण देखें"
+  }
+}

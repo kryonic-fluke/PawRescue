@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "report": "Reportar Emergencia",
+    "adopt": "Adoptar",
+    "map": "Mapa en Vivo",
+    "messages": "Mensajes",
+    "profile": "Perfil",
+    "settings": "Configuración"
+  },
+  "home": {
+    "welcome": "¡Bienvenido, {{name}}!",
+    "welcomeBack": "¡Nos alegra verte de nuevo! ¿Listo para ayudar a los animales hoy?",
+    "hero": {
+      "title": "Cada Animal Merece una",
+      "subtitle": "Segunda Oportunidad",
+      "description": "Conecta rescatistas, refugios y amantes de los animales en una sola plataforma. Reporta emergencias, encuentra mascotas en adopción y ayuda a construir una comunidad que salve vidas todos los días.",
+      "reportBtn": "Reportar Emergencia",
+      "adoptBtn": "Encontrar Mascota"
+    },
+    "features": {
+      "title": "Cómo Funciona PawRescue",
+      "description": "Nuestra plataforma conecta a todos los involucrados en el rescate y adopción de animales, creando una experiencia fluida que ahorra tiempo y salva vidas."
+    }
+  },
+  "stats": {
+    "rescued": "Animales Rescatados",
+    "adoptions": "Adopciones Exitosas",
+    "ngos": "ONGs Asociadas",
+    "cities": "Ciudades Cubiertas"
+  },
+  "settings": {
+    "title": "Configuración",
+    "subtitle": "Personaliza tu experiencia en PawRescue y administra tus preferencias de cuenta",
+    "account": "Cuenta",
+    "notifications": "Notificaciones",
+    "privacy": "Privacidad",
+    "appearance": "Apariencia",
+    "data": "Datos",
+    "theme": "Tema",
+    "language": "Idioma",
+    "timezone": "Zona Horaria",
+    "save": "Guardar Cambios",
+    "export": "Exportar Datos"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "submit": "Enviar",
+    "search": "Buscar",
+    "filter": "Filtrar"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "register": "Crear Cuenta",
+    "logout": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "name": "Nombre Completo",
+    "rememberMe": "Recordarme",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta?",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "createAccount": "Crea una ahora",
+    "signInHere": "Inicia sesión aquí"
+  },
+  "examples": {
+    "translation": {
+      "title": "Ejemplo de Traducción",
+      "description": "Este componente demuestra cómo usar el sistema de traducción.",
+      "simpleExample": "Traducción Simple:",
+      "withVariables": "Con Variables:",
+      "welcomeMessage": "¡Bienvenido, {{name}}!"
+    }
+  },
+  "messages": {
+    "title": "Mensajes",
+    "search": "Buscar contactos...",
+    "newChat": "Nuevo Chat",
+    "selectChat": "Selecciona un contacto para comenzar a chatear",
+    "typeMessage": "Escribe un mensaje...",
+    "send": "Enviar"
+  },
+  "adoption": {
+    "title": "Encuentra tu Mascota Ideal",
+    "available": "Disponibles para Adopción",
+    "apply": "Solicitar Adopción",
+    "contact": "Contactar Refugio",
+    "learnMore": "Saber Más"
+  },
+  "report": {
+    "title": "Reportar Emergencia Animal",
+    "description": "Ayúdanos a rescatar animales en peligro",
+    "location": "Ubicación",
+    "photos": "Subir Fotos",
+    "submit": "Enviar Reporte"
+  },
+  "notification": {
+    "success": "¡Éxito!",
+    "error": "Error",
+    "warning": "Advertencia",
+    "info": "Información"
+  },
+  "profile": {
+    "title": "Perfil",
+    "noBio": "Sin biografía",
+    "animalsHelped": "ayudados",
+    "adopted": "adoptados",
+    "editProfile": "Editar Perfil",
+    "personalInfo": "Información Personal",
+    "phone": "Teléfono",
+    "phonePlaceholder": "Ingresa tu número de teléfono",
+    "location": "Ubicación",
+    "locationPlaceholder": "Ingresa tu ubicación",
+    "bio": "Biografía",
+    "bioPlaceholder": "Cuéntanos sobre ti...",
+    "updateSuccess": "Perfil actualizado exitosamente",
+    "changeAvatar": "Cambiar foto de perfil",
+    "changeProfilePicture": "Cambiar Foto de Perfil",
+    "uploadPhoto": "Subir Foto",
+    "takePhoto": "Tomar Foto",
+    "cameraPreview": "Vista previa de la cámara",
+    "removePhoto": "Eliminar Foto",
+    "avatarUpdateSuccess": "¡Foto de perfil actualizada!",
+    "avatarRemoved": "Foto de perfil eliminada",
+    "tabs": {
+      "profile": "Perfil",
+      "activity": "Actividad",
+      "achievements": "Insignias",
+      "pets": "Mascotas",
+      "preferences": "Configuración"
+    },
+    "recentActivity": "Actividad Reciente",
+    "badges": "Insignias y Logros",
+    "myPets": "Mis Mascotas Adoptadas",
+    "addPet": "Añadir Mascota",
+    "adoptedOn": "Adoptado el",
+    "noPetsYet": "Aún no hay mascotas adoptadas",
+    "adoptPetMessage": "¡Adopta una mascota y dale un hogar para siempre!",
+    "browsePets": "Ver Mascotas",
+    "activity": {
+      "reportedinjureddog": "Reportó un perro herido",
+      "donatedtoanimalshelter": "Donó a un refugio de animales",
+      "adoptedacat": "Adoptó un gato"
+    },
+    "locations": {
+      "LodhiGarden": "Jardín Lodhi",
+      "FriendicoesSECA": "Friendicoes SECA",
+      "SanjayGandhiAnimalCareCentre": "Centro de Cuidado Animal Sanjay Gandhi"
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "notifications": "Notificaciones",
+    "manageNotifications": "Administra tus preferencias de notificaciones",
+    "emailNotifications": "Notificaciones por Correo",
+    "pushNotifications": "Notificaciones Push",
+    "adoptionAlerts": "Alertas de Adopción",
+    "rescueUpdates": "Actualizaciones de Rescate",
+    "newsletter": "Boletín Informativo",
+    "dangerZone": "Zona de Peligro",
+    "dangerZoneDesc": "Estas acciones son irreversibles",
+    "deleteAccount": "Eliminar Cuenta"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "uploading": "Subiendo...",
+    "user": "Usuario",
+    "viewDetails": "Ver Detalles"
+  }
+}
