@@ -5,7 +5,7 @@ import { ngos } from '../../../db/schema';
 import { eq, like, or, and, desc } from 'drizzle-orm';
 
 const router = Router();
-r
+
 // GET /api/ngos - Get all NGOs or single NGO by ID
 router.get('/', async (req: Request, res: Response) => {
   try {
