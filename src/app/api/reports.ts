@@ -1,17 +1,19 @@
 // src/app/api/reports.ts
 import { Router } from 'express';
-import { db } from '@/lib/db';
-import { reports } from '@/lib/db/reports';
-import { sendReportEmail } from '@/lib/email/report-email';
+
+
+import { db } from '../../lib/db.js'; 
+
+import { reports } from '../../lib/db/reports.js';
+
+import { sendReportEmail } from '../../lib/email/report-email.js';
 
 const router = Router();
 
-// POST /api/reports - Create a new report
 router.post('/', async (req, res) => {
   try {
     const reportData = req.body;
 
-    // Validate required fields (accept both camelCase and snake_case)
     const reporterEmail = reportData.reporter_email || reportData.reporterEmail;
     const reporterName = reportData.reporter_name || reportData.reporterName;
     const animalType = reportData.animal_type || reportData.animalType;
