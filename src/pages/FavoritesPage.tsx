@@ -23,6 +23,7 @@ import {
   Mail,
   HeartOff
 } from "lucide-react";
+import AICHatAdvisor from "./AIChatAdvisor";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -110,96 +111,96 @@ const calculateAIMatchScore = (pet: FavoritePet): number => {
 };
 
 // Mock AI Chat Advisor
-const AIChatAdvisor = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      id: '1',
-      sender: 'ai',
-      content: "Hello! I'm your pet adoption advisor. Ask me anything about these pets or compare them to help make your decision easier.",
-      timestamp: new Date()
-    }
-  ]);
-  const [input, setInput] = useState('');
+// const AIChatAdvisor = () => {
+//   const [messages, setMessages] = useState<ChatMessage[]>([
+//     {
+//       id: '1',
+//       sender: 'ai',
+//       content: "Hello! I'm your pet adoption advisor. Ask me anything about these pets or compare them to help make your decision easier.",
+//       timestamp: new Date()
+//     }
+//   ]);
+//   const [input, setInput] = useState('');
 
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+//   const handleSend = (e: React.FormEvent) => {
+//     e.preventDefault();
+//     if (!input.trim()) return;
 
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
-      sender: 'user',
-      content: input,
-      timestamp: new Date()
-    };
+//     const userMessage: ChatMessage = {
+//       id: Date.now().toString(),
+//       sender: 'user',
+//       content: input,
+//       timestamp: new Date()
+//     };
 
-    setMessages(prev => [...prev, userMessage]);
-    setInput('');
+//     setMessages(prev => [...prev, userMessage]);
+//     setInput('');
 
-    setTimeout(() => {
-      const responses = [
-        "That's a great question! Based on my analysis, I'd recommend considering the pet's energy level and how it matches your lifestyle.",
-        "I can help you compare the size, temperament, and care requirements of these pets. What would you like to know more about?",
-        "Many adopters find it helpful to consider their living situation and daily routine when choosing between these pets.",
-        "Both pets have their unique qualities. The right choice depends on what you're looking for in a companion.",
-        "I can see you're interested in these pets. Would you like me to highlight the key differences between them?"
-      ];
+//     setTimeout(() => {
+//       const responses = [
+//         "That's a great question! Based on my analysis, I'd recommend considering the pet's energy level and how it matches your lifestyle.",
+//         "I can help you compare the size, temperament, and care requirements of these pets. What would you like to know more about?",
+//         "Many adopters find it helpful to consider their living situation and daily routine when choosing between these pets.",
+//         "Both pets have their unique qualities. The right choice depends on what you're looking for in a companion.",
+//         "I can see you're interested in these pets. Would you like me to highlight the key differences between them?"
+//       ];
       
-      const aiMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        content: responses[Math.floor(Math.random() * responses.length)],
-        timestamp: new Date()
-      };
+//       const aiMessage: ChatMessage = {
+//         id: (Date.now() + 1).toString(),
+//         sender: 'ai',
+//         content: responses[Math.floor(Math.random() * responses.length)],
+//         timestamp: new Date()
+//       };
 
-      setMessages(prev => [...prev, aiMessage]);
-    }, 1000);
-  };
+//       setMessages(prev => [...prev, aiMessage]);
+//     }, 1000);
+//   };
 
-  return (
-    <Card className="h-full flex flex-col">
-      <CardHeader className="border-b">
-        <CardTitle className="flex items-center gap-2">
-          <MessageSquare className="h-5 w-5 text-primary" />
-          AI Adoption Advisor
-        </CardTitle>
-      </CardHeader>
-      <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                  message.sender === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
-                }`}
-              >
-                <p className="text-sm">{message.content}</p>
-                <p className="text-xs opacity-70 mt-1 text-right">
-                  {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </ScrollArea>
-      <div className="border-t p-4">
-        <form onSubmit={handleSend} className="flex gap-2">
-          <Input
-            placeholder="Ask about these pets..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="flex-1"
-          />
-          <Button type="submit">Send</Button>
-        </form>
-      </div>
-    </Card>
-  );
-};
+//   return (
+//     <Card className="h-full flex flex-col">
+//       <CardHeader className="border-b">
+//         <CardTitle className="flex items-center gap-2">
+//           <MessageSquare className="h-5 w-5 text-primary" />
+//           AI Adoption Advisor
+//         </CardTitle>
+//       </CardHeader>
+//       <ScrollArea className="flex-1 p-4">
+//         <div className="space-y-4">
+//           {messages.map((message) => (
+//             <div
+//               key={message.id}
+//               className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+//             >
+//               <div
+//                 className={`max-w-[80%] rounded-lg px-4 py-2 ${
+//                   message.sender === 'user'
+//                     ? 'bg-primary text-primary-foreground'
+//                     : 'bg-muted'
+//                 }`}
+//               >
+//                 <p className="text-sm">{message.content}</p>
+//                 <p className="text-xs opacity-70 mt-1 text-right">
+//                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+//                 </p>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </ScrollArea>
+//       <div className="border-t p-4">
+//         <form onSubmit={handleSend} className="flex gap-2">
+//           <Input
+//             placeholder="Ask about these pets..."
+//             value={input}
+//             onChange={(e) => setInput(e.target.value)}
+//             className="flex-1"
+//           />
+//           <Button type="submit">Send</Button>
+//         </form>
+//       </div>
+//     </Card>
+//   );
+// };
 
 // Pet Comparison Component
 const ComparePets = ({ pets, onClose }: { pets: FavoritePet[], onClose: () => void }) => {
@@ -937,11 +938,9 @@ const FavoritesPage = () => {
       </Tabs>
 
       {/* AI Chat Advisor - Only show when pets are selected */}
-      {selectedForComparison.size > 0 && (
-        <div className="fixed bottom-6 right-6 w-full max-w-md">
-          <AIChatAdvisor />
-        </div>
-      )}
+     <AICHatAdvisor
+   selectedPets={displayFavorites.filter(pet => selectedForComparison.has(pet.id))} 
+/>
 
       {/* Comparison Modal */}
       {showComparison && (

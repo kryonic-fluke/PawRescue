@@ -10,9 +10,9 @@ export const authClient = {
     try {
       const token = typeof window !== 'undefined' ? localStorage.getItem('bearer_token') : null;
       if (token) {
-        await fetch(`${API_PREFIX}/api/auth/local/logout`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } }).catch(() => {});
+        await fetch(`${API_PREFIX}/api/auth/local/logout`, { method: 'POST', headers: { Authorization: `Bearer ${token}` } }).catch(() => { });
       }
-    } catch {}
+    } catch { }
     if (typeof window !== 'undefined') {
       localStorage.removeItem('bearer_token');
       localStorage.removeItem('mock_user');
@@ -51,7 +51,7 @@ export const authClient = {
       localStorage.setItem('mock_user', JSON.stringify({ id: user.id, name: user.name, email: user.email }));
       return { data: { user: { id: user.id, name: user.name, email: user.email }, session: { token } }, error: null };
     },
-    social: async (_opts: any) => {
+    social: async (_opts: unknown) => {
       // Social not supported in this shim
       return { url: null };
     }

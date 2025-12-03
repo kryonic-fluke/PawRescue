@@ -1,18 +1,16 @@
 // src/db/schema.ts
-import { 
-  pgTable, 
-  serial, 
-  text, 
-  integer, 
-  boolean, 
-  timestamp, 
-  real, 
+import {
+  pgTable,
+  serial,
+  text,
+  integer,
+  boolean,
+  timestamp,
+  real,
   jsonb,
-  primaryKey,
   pgEnum
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
-import { z } from 'zod';
 
 // Enums
 export const urgencyEnum = pgEnum('urgency', ['low', 'medium', 'high', 'critical']);

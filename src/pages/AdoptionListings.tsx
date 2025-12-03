@@ -31,6 +31,27 @@ interface Animal {
   neutered?: boolean;
 }
 
+interface RawPet {
+  id?: string | number;
+  name?: string;
+  type?: string;
+  breed?: string;
+  breedName?: string;
+  age?: string;
+  size?: string;
+  location?: string;
+  city?: string;
+  description?: string;
+  image?: string;
+  photo?: string;
+  shelterId?: number;
+  status?: string;
+  gender?: string;
+  contact?: string;
+  vaccinated?: boolean;
+  neutered?: boolean;
+}
+
 const AdoptionListings: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState({
@@ -59,9 +80,9 @@ const AdoptionListings: React.FC = () => {
       setPetsError(null);
       try {
         // Attempt to load from mockApi; fallback to an empty list if not available
-        const data = (await (mockApi.getPets ? mockApi.getPets() : Promise.resolve([]))) as any[];
+        const data = (await (mockApi.getPets ? mockApi.getPets() : Promise.resolve([]))) as RawPet[];
         // Normalize to our Animal type and string ids
-        const formatted: Animal[] = (data || []).map((p: any) => ({
+        const formatted: Animal[] = (data || []).map((p: RawPet) => ({
           id: p.id?.toString() ?? String(Math.random()).slice(2),
           name: p.name || "Unnamed",
           type: p.type || "dog",
@@ -159,7 +180,7 @@ const AdoptionListings: React.FC = () => {
   // PetFacts component with interactive statistics
   const PetFacts = () => {
     const [activeTab, setActiveTab] = useState('dogs');
-    
+
     const petStats = {
       dogs: {
         title: 'Dogs in India',
@@ -192,8 +213,8 @@ const AdoptionListings: React.FC = () => {
           { value: '60%', label: 'successful rehabilitation rate' },
           { value: '24/7', label: 'rescue helplines available' }
         ],
-        fact: 'Wildlife SOS operates one of the largest rescue and rehabilitation programs for wildlife in India, including the famous ' + 
-              'sloth bear rescue and rehabilitation center.'
+        fact: 'Wildlife SOS operates one of the largest rescue and rehabilitation programs for wildlife in India, including the famous ' +
+          'sloth bear rescue and rehabilitation center.'
       }
     };
 
@@ -206,17 +227,16 @@ const AdoptionListings: React.FC = () => {
             Pet & Wildlife Insights
           </span>
         </h2>
-        
+
         <div className="flex space-x-2 mb-6 overflow-x-auto pb-2">
           {Object.entries(petStats).map(([key, { title, icon }]) => (
             <button
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeTab === key
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === key
                   ? 'bg-rose-100 text-rose-700 shadow-sm'
                   : 'text-gray-600 hover:bg-gray-100'
-              }`}
+                }`}
             >
               <div className="flex items-center space-x-2">
                 {icon}
@@ -238,7 +258,7 @@ const AdoptionListings: React.FC = () => {
               ))}
             </div>
           </Card>
-          
+
           <Card className="p-6 bg-white/80 backdrop-blur-sm flex flex-col">
             <h3 className="text-lg font-semibold mb-4 text-gray-800">Did You Know?</h3>
             <div className="bg-gradient-to-br from-rose-50 to-amber-50 p-4 rounded-lg flex-1 flex items-center">
@@ -249,11 +269,11 @@ const AdoptionListings: React.FC = () => {
             </div>
           </Card>
         </div>
-        
+
         <div className="mt-6 text-center">
-          <a 
-            href="https://en.wikipedia.org/wiki/Animal_shelter#In_India" 
-            target="_blank" 
+          <a
+            href="https://en.wikipedia.org/wiki/Animal_shelter#In_India"
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
           >
@@ -289,10 +309,10 @@ const AdoptionListings: React.FC = () => {
                   className="pl-10"
                 />
               </div>
-              
+
               <div className="md:hidden">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full"
                   onClick={() => setShowFilters(!showFilters)}
                 >
@@ -303,8 +323,8 @@ const AdoptionListings: React.FC = () => {
 
               <div className={`${showFilters ? 'block' : 'hidden'} md:block col-span-1 md:col-span-3`}>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <Select 
-                    value={filters.type} 
+                  <Select
+                    value={filters.type}
                     onValueChange={(value) => setFilters(prev => ({ ...prev, type: value }))}
                   >
                     <SelectTrigger>
@@ -319,8 +339,8 @@ const AdoptionListings: React.FC = () => {
                     </SelectContent>
                   </Select>
 
-                  <Select 
-                    value={filters.size} 
+                  <Select
+                    value={filters.size}
                     onValueChange={(value) => setFilters(prev => ({ ...prev, size: value }))}
                   >
                     <SelectTrigger>
@@ -334,8 +354,8 @@ const AdoptionListings: React.FC = () => {
                     </SelectContent>
                   </Select>
 
-                  <Select 
-                    value={filters.location} 
+                  <Select
+                    value={filters.location}
                     onValueChange={(value) => setFilters(prev => ({ ...prev, location: value }))}
                   >
                     <SelectTrigger>
@@ -410,25 +430,25 @@ const AdoptionListings: React.FC = () => {
                         <div><span className="font-medium">Location:</span> {pet.location}</div>
                       </div>
 
-                      <Collapsible.Root 
-                        open={expandedPet === pet.id} 
+                      <Collapsible.Root
+                        open={expandedPet === pet.id}
                         onOpenChange={() => togglePetDetails(pet.id)}
                         className="w-full"
                       >
                         <div className="flex gap-2 w-full">
                           <Collapsible.Trigger asChild>
-                            <Button 
-                              variant="outline" 
-                              size="sm" 
+                            <Button
+                              variant="outline"
+                              size="sm"
                               className="flex-1"
                             >
                               {expandedPet === pet.id ? 'Hide Details' : 'View Details'}
                             </Button>
                           </Collapsible.Trigger>
 
-                          <Button 
-                            variant={isFavorite(pet.id) ? "default" : "outline"} 
-                            size="sm" 
+                          <Button
+                            variant={isFavorite(pet.id) ? "default" : "outline"}
+                            size="sm"
                             onClick={() => handleFavoriteClick(pet as Animal)}
                             title={isFavorite(pet.id) ? "Remove favorite" : "Add to favorites"}
                           >
@@ -445,8 +465,8 @@ const AdoptionListings: React.FC = () => {
                               <p><span className="font-medium">Vaccinated:</span> <span className="text-gray-700">{pet.vaccinated ? 'Yes' : 'No'}</span></p>
                               <p><span className="font-medium">Neutered/Spayed:</span> <span className="text-gray-700">{pet.neutered ? 'Yes' : 'No'}</span></p>
                             </div>
-                            <Button 
-                              className="mt-3 w-full bg-blue-600 hover:bg-blue-700" 
+                            <Button
+                              className="mt-3 w-full bg-blue-600 hover:bg-blue-700"
                               onClick={() => handleAdoptClick(pet.id)}
                             >
                               Adopt Me

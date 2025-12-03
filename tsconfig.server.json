@@ -2,10 +2,16 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "rootDir": "./src",
     "noEmit": false
   },
-  "include": ["src/server.ts"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "src/server.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
 }

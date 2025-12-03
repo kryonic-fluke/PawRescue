@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     const animalType = reportData.animal_type || reportData.animalType;
 
     if (!reporterEmail || !reporterName || !animalType || !reportData.location) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Missing required fields',
         details: {
           reporter_email: !reporterEmail ? 'Email is required' : undefined,
@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
 });
 
 // GET /api/reports - Get all reports
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   try {
     const allReports = await db.select().from(reports);
     return res.json(allReports);

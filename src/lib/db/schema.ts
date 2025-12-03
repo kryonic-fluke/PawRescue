@@ -1,8 +1,8 @@
 // src/lib/schema.ts
-import { pgTable, uuid, text, integer, boolean, timestamp, jsonb, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, integer, boolean, timestamp, jsonb } from 'drizzle-orm/pg-core';
 
 // Status enum
-const petStatusEnum = pgEnum('pet_status', ['available', 'adopted', 'pending']);
+// const petStatusEnum = pgEnum('pet_status', ['available', 'adopted', 'pending']);
 
 export const pets = pgTable('pets', {
   id: uuid('id').primaryKey().defaultRandom(),

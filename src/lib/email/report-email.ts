@@ -2,7 +2,12 @@
 import { Resend } from 'resend';
 import { Report } from '@/lib/db/reports';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Make Resend optional - only initialize if API key is present
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+
+if (!resend) {
+  console.warn('⚠️ RESEND_API_KEY not set - email notifications will be disabled');
+}
 
 interface SendReportEmailParams {
   to: string;
@@ -11,6 +16,12 @@ interface SendReportEmailParams {
 }
 
 export async function sendReportEmail({ to, report, reportId }: SendReportEmailParams) {
+  // Skip if Resend is not configured
+  if (!resend) {
+    console.log('📧 Email notifications disabled - skipping email to:', to);
+    return { success: false, message: 'Email service not configured' };
+  }
+
   try {
     const data = await resend.emails.send({
       from: 'PawRescue <onboarding@resend.dev>',
@@ -36,10 +47,10 @@ export async function sendReportEmail({ to, report, reportId }: SendReportEmailP
       `,
     });
 
-    console.log('Email sent:', data);
+    console.log('✅ Email sent:', data);
     return data;
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('❌ Error sending email:', error);
     throw error;
   }
 }

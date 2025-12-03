@@ -3,15 +3,24 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig(({ mode }) => {
-  // Load environment variables based on the current mode
+  // Load environment variables
   const env = loadEnv(mode, process.cwd(), '');
 
-  // Extract necessary environment variables
+  // Extract variables
   const apiTarget = env.VITE_API_URL || 'http://localhost:3001';
-  const clerkFrontendApi = env.VITE_CLERK_FRONTEND_API || 'desired-crow-80.clerk.accounts.dev';
+  let clerkFrontendApi = env.VITE_CLERK_FRONTEND_API || 'desired-crow-80.clerk.accounts.dev';
   const clerkPublishableKey = env.VITE_CLERK_PUBLISHABLE_KEY;
 
-  // Log loaded environment variables for debugging
+  // --- FIX: Remove https:// from variable if it exists, so we don't double add it later ---
+  if (clerkFrontendApi.startsWith('https://')) {
+    clerkFrontendApi = clerkFrontendApi.replace('https://', '');
+  }
+  if (clerkFrontendApi.startsWith('http://')) {
+    clerkFrontendApi = clerkFrontendApi.replace('http://', '');
+  }
+
+  // Now clerkFrontendApi is JUST the domain (e.g. "desired-crow-80...")
+
   console.log('Environment Variables:', {
     VITE_CLERK_PUBLISHABLE_KEY: clerkPublishableKey ? '✅ Set' : '❌ Missing',
     VITE_CLERK_FRONTEND_API: clerkFrontendApi,
@@ -21,19 +30,16 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     base: '/',
+    // Global constant replacements
     define: {
       'import.meta.env.VITE_CLERK_PUBLISHABLE_KEY': JSON.stringify(clerkPublishableKey),
       'import.meta.env.VITE_API_URL': JSON.stringify(apiTarget),
       'import.meta.env.VITE_CLERK_FRONTEND_API': JSON.stringify(clerkFrontendApi),
-      'process.env': {
-        VITE_CLERK_PUBLISHABLE_KEY: JSON.stringify(clerkPublishableKey),
-        VITE_API_URL: JSON.stringify(apiTarget),
-        VITE_CLERK_FRONTEND_API: JSON.stringify(clerkFrontendApi)
-      }
     },
     build: {
-      outDir: 'dist/client', // Updated to match server.ts expectations
+      outDir: 'dist/client', 
       sourcemap: true,
+      emptyOutDir: true,
       chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
@@ -43,8 +49,6 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      // Add emptyOutDir to ensure clean builds
-      emptyOutDir: true,
     },
     resolve: {
       alias: {
@@ -56,42 +60,21 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       strictPort: true,
       open: true,
-      hmr: {
-        clientPort: 3000,
-      },
       proxy: {
-        // API endpoints
+        // --- 1. PROXY FOR BACKEND (Port 3001) ---
         '/api': {
           target: apiTarget,
           changeOrigin: true,
           secure: false,
         },
-        '/pets': {
-          target: apiTarget,
-          changeOrigin: true,
-          secure: false,
-        },
-        '/auth': {
-          target: apiTarget,
-          changeOrigin: true,
-          secure: false,
-        },
-        '/ngos': {
-          target: apiTarget,
-          changeOrigin: true,
-          secure: false,
-        },
-        '/animal-shelters': {
-          target: apiTarget,
-          changeOrigin: true,
-          secure: false,
-        },
-        '/rescue-reports': {
-          target: apiTarget,
-          changeOrigin: true,
-          secure: false,
-        },
-        // Clerk OAuth and API endpoints
+        '/pets': { target: apiTarget, changeOrigin: true, secure: false },
+        '/auth': { target: apiTarget, changeOrigin: true, secure: false },
+        '/ngos': { target: apiTarget, changeOrigin: true, secure: false },
+        '/animal-shelters': { target: apiTarget, changeOrigin: true, secure: false },
+        '/rescue-reports': { target: apiTarget, changeOrigin: true, secure: false },
+
+        // --- 2. PROXY FOR CLERK AUTH ---
+        // Since we stripped the protocol at the top, we can safely add https:// here
         '/v1': {
           target: `https://${clerkFrontendApi}`,
           changeOrigin: true,
@@ -120,50 +103,6 @@ export default defineConfig(({ mode }) => {
           secure: false,
         }
       },
-      cors: {
-        origin: [
-          'http://localhost:3000',
-          'http://localhost:3001',
-          `https://${clerkFrontendApi}` 
-        ],
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        preflightContinue: false,
-        optionsSuccessStatus: 204,
-        credentials: true,
-        allowedHeaders: [
-          'X-CSRF-Token',
-          'X-Requested-With',
-          'Accept',
-          'Accept-Version',
-          'Content-Length',
-          'Content-MD5',
-          'Content-Type',
-          'Date',
-          'X-Api-Version',
-          'Authorization',
-          'x-clerk-auth-reason',
-          'x-clerk-auth-message',
-          'x-clerk-auth-status',
-          'x-clerk-auth-version',
-          'x-clerk-debug',
-          'x-clerk-source',
-          'x-clerk-user-agent'
-        ].join(', ')
-      }
     },
-    optimizeDeps: {
-      include: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        '@clerk/clerk-react'
-      ],
-      esbuildOptions: {
-        // Node.js global to browser globalThis
-        define: {
-          global: 'globalThis'
-        }
-      }
-    }
   };
 });

@@ -9,6 +9,23 @@ interface NotificationOptions {
   notificationType?: string;
 }
 
+interface SoundPreference {
+  notificationSound: string;
+  customSoundUrl: string;
+}
+
+interface NotificationResult {
+  success: boolean;
+  data?: unknown;
+  error?: string;
+}
+
+declare global {
+  interface Window {
+    webkitAudioContext: typeof AudioContext;
+  }
+}
+
 export function useNotifications() {
   const [sending, setSending] = useState(false);
 
@@ -54,19 +71,19 @@ export function useNotifications() {
         }
         // Play according to settings
         const soundPrefRaw = localStorage.getItem('settings_notifications');
-        let soundPref: any = { notificationSound: 'beep', customSoundUrl: '' };
-        try { if (soundPrefRaw) soundPref = JSON.parse(soundPrefRaw); } catch {}
+        let soundPref: SoundPreference = { notificationSound: 'beep', customSoundUrl: '' };
+        try { if (soundPrefRaw) soundPref = JSON.parse(soundPrefRaw); } catch { }
         const playSound = async () => {
           try {
             const sound = soundPref.notificationSound || 'beep';
             const url = soundPref.customSoundUrl || '';
             if (sound === 'custom' && url) {
               const a = new Audio(url);
-              a.play().catch(() => {});
+              a.play().catch(() => { });
               return;
             }
 
-            const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const g = ctx.createGain();
             g.gain.value = 0.05;
             g.connect(ctx.destination);
@@ -92,10 +109,11 @@ export function useNotifications() {
         playSound();
       } catch (e) { /* ignore notification errors */ }
       return { success: true, data: result };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Email notification error:', error);
       toast.error('Failed to send email notification');
-      return { success: false, error: error.message };
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
     } finally {
       setSending(false);
     }
@@ -128,7 +146,7 @@ export function useNotifications() {
       }
 
       const result = await response.json();
-      
+
       if (result.demo) {
         toast.info('SMS notification queued (Demo Mode)');
       } else {
@@ -147,19 +165,19 @@ export function useNotifications() {
         }
 
         const soundPrefRaw = localStorage.getItem('settings_notifications');
-        let soundPref: any = { notificationSound: 'beep', customSoundUrl: '' };
-        try { if (soundPrefRaw) soundPref = JSON.parse(soundPrefRaw); } catch {}
+        let soundPref: SoundPreference = { notificationSound: 'beep', customSoundUrl: '' };
+        try { if (soundPrefRaw) soundPref = JSON.parse(soundPrefRaw); } catch { }
         const playSound = async () => {
           try {
             const sound = soundPref.notificationSound || 'beep';
             const url = soundPref.customSoundUrl || '';
             if (sound === 'custom' && url) {
               const a = new Audio(url);
-              a.play().catch(() => {});
+              a.play().catch(() => { });
               return;
             }
 
-            const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const g = ctx.createGain();
             g.gain.value = 0.04;
             g.connect(ctx.destination);
@@ -184,12 +202,13 @@ export function useNotifications() {
         };
         playSound();
       } catch (e) { /* ignore notification errors */ }
-      
+
       return { success: true, data: result };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('SMS notification error:', error);
       toast.error('Failed to send SMS notification');
-      return { success: false, error: error.message };
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      return { success: false, error: errorMessage };
     } finally {
       setSending(false);
     }
@@ -197,8 +216,8 @@ export function useNotifications() {
 
   const sendNotification = useCallback(async (options: NotificationOptions) => {
     const results = {
-      email: null as any,
-      sms: null as any
+      email: null as NotificationResult | null,
+      sms: null as NotificationResult | null
     };
 
     // Send email if email provided
@@ -211,8 +230,8 @@ export function useNotifications() {
       results.sms = await sendSMSNotification(options);
     }
 
-    const allSuccessful = 
-      (!options.email || results.email?.success) && 
+    const allSuccessful =
+      (!options.email || results.email?.success) &&
       (!options.phoneNumber || results.sms?.success);
 
     return {

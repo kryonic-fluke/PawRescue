@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist/client" }
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/src/server.ts" },
+    { "source": "/pets", "destination": "/src/server.ts" },
+    { "source": "/auth/(.*)", "destination": "/src/server.ts" },
+    { "source": "/ngos/(.*)", "destination": "/src/server.ts" },
+    { "source": "/animal-shelters/(.*)", "destination": "/src/server.ts" },
+    { "source": "/rescue-reports/(.*)", "destination": "/src/server.ts" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

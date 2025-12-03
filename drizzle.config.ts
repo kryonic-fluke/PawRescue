@@ -1,8 +1,17 @@
 import type { Config } from 'drizzle-kit';
 import * as dotenv from 'dotenv';
+import * as path from 'path';
+import * as fs from 'fs';
 
-// Load environment variables from .env file
-dotenv.config({ path: '.env' });
+// Load environment variables - try .env.local first, then .env
+const envLocalPath = path.resolve(process.cwd(), '.env.local');
+const envPath = path.resolve(process.cwd(), '.env');
+
+if (fs.existsSync(envLocalPath)) {
+  dotenv.config({ path: envLocalPath });
+} else if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+}
 
 // Check if DATABASE_URL is set
 if (!process.env.DATABASE_URL) {

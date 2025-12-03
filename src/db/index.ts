@@ -1,8 +1,20 @@
 // src/db/index.ts
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres, { Options } from 'postgres';
-import * as schema from '../lib/db/schema';
-import 'dotenv/config';
+import * as schema from './schema';  // Changed from '../lib/db/schema' to './schema'
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+import * as fs from 'fs';
+
+// Load environment variables - try .env.local first, then .env
+const envLocalPath = path.resolve(process.cwd(), '.env.local');
+const envPath = path.resolve(process.cwd(), '.env');
+
+if (fs.existsSync(envLocalPath)) {
+  dotenv.config({ path: envLocalPath });
+} else if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+}
 
 // Validate required environment variables
 const requiredEnvVars = ['DATABASE_URL'];
@@ -20,7 +32,7 @@ export type Database = ReturnType<typeof createDatabaseConnection>;
 // Create a single reusable connection pool
 const createDatabaseConnection = () => {
   const connectionString = process.env.DATABASE_URL!;
-  
+
   // Configure the PostgreSQL client
   const client = postgres(connectionString, {
     ssl: process.env.NODE_ENV === 'production' ? 'require' : 'prefer',
@@ -28,7 +40,7 @@ const createDatabaseConnection = () => {
     idle_timeout: 20,
     max_lifetime: 60 * 30, // 30 minutes
     connect_timeout: 10,
-    onnotice: () => {}, // Suppress notice messages
+    onnotice: () => { }, // Suppress notice messages
     onparameter: (key: string) => {
       if (key === 'server_version') {
         console.log('Connected to PostgreSQL server');
@@ -84,4 +96,4 @@ testConnection().catch(console.error);
 export { db, client };
 
 // Re-export schema types for convenience
-export * from '../lib/db/schema';
+export * from './schema';

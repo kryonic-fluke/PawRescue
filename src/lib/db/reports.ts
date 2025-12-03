@@ -1,6 +1,6 @@
 // src/lib/db/reports.ts
 import { pgTable, uuid, text, timestamp, boolean, jsonb } from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
+
 
 export const reports = pgTable('reports', {
   id: uuid('id').primaryKey().defaultRandom(),
