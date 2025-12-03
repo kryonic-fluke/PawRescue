@@ -2,7 +2,7 @@
 import express from 'express';
 import { petsHandlers } from './pets/route.js';
 import ngoRouter from './ngos/route.js';
-import animalSheltersRouter from './animal-shelters/route';
+import animalSheltersRouter from './animal-shelters/route.js';
 
 const router = express.Router();
 

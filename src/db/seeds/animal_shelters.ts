@@ -211,7 +211,7 @@ async function main() {
         }
     ];
 
-    await db.insert(animalShelters).values(sampleShelters);
+    await db.insert(animalShelters).values(sampleShelters as any);
     
     console.log('✅ Animal shelters seeder completed successfully');
 }
