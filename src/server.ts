@@ -67,9 +67,9 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
 
 export default app;
 
-// Start server
-if (process.env.NODE_ENV !== 'production') {
-  
+const shouldStartServer = process.env.NODE_ENV !== 'production' || process.argv[1].includes('server.ts');
+
+if (shouldStartServer) {
   const server = app.listen(PORT, () => {
     console.log('\n🚀 Server started successfully!');
     console.log(`📍 Mode: ${process.env.NODE_ENV || 'development'}`);
@@ -78,7 +78,7 @@ if (process.env.NODE_ENV !== 'production') {
     console.log(`💚 Health: http://localhost:${PORT}/health\n`);
   });
 
-  // Handle unhandled promise rejections (Only needed when running locally)
+  // Handle unhandled promise rejections
   process.on('unhandledRejection', (err: Error) => {
     console.error('❌ Unhandled Rejection:', err);
     server.close(() => process.exit(1));

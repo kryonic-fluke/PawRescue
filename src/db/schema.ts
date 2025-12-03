@@ -116,7 +116,7 @@ export const animalShelters = pgTable('animal_shelters', {
 export const pets = pgTable('pets', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
-  species: text('species').notNull(),
+  type: text('type').notNull(),
   breed: text('breed'),
   age: integer('age'),
   gender: text('gender'),
@@ -132,6 +132,7 @@ export const pets = pgTable('pets', {
   images: jsonb('images').$type<string[]>(),
   imageUrl: text('image_url'),
   specialNeeds: text('special_needs'),
+  status: text("status"),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

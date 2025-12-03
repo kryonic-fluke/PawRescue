@@ -1,26 +1,32 @@
 // src/app/api/pets/route.ts
 import { Request, Response } from 'express';
-import { db } from '../../../lib/db.js'; 
-import { schema } from '../../../lib/schema';
+import { db } from '../../../lib/db.js';
+
 import { eq, and, or, like, desc, sql } from 'drizzle-orm';
 import { z } from 'zod';
+import * as schema from '../../../db/schema.js';
 
 // Schema for pet creation/update validation
+// Aligned with actual database schema
 const petSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  type: z.string().min(1, "Type is required"), // Changed from species to type
+  type: z.string().min(1, "Type is required"),
   breed: z.string().optional(),
   age: z.number().int().positive().optional(),
-  gender: z.string().optional(), // Changed from enum to string
-  size: z.string().optional(), // Changed from enum to string
+  gender: z.string().optional(),
+  size: z.string().optional(),
+  color: z.string().optional(),
   description: z.string().optional(),
-  medical_history: z.record(z.unknown()).optional().default({}), // Changed to match DB
-  vaccinated: z.boolean().default(false),
+  healthStatus: z.string().optional(),
+  vaccinationStatus: z.string().optional(),
   neutered: z.boolean().default(false),
-  adoption_fee: z.number().int().nonnegative().optional(), // Changed to match DB
-  shelter_id: z.string().uuid().optional().nullable(), // Changed to match DB
-  images: z.array(z.string()).default([]), // Changed to match DB
-  status: z.string().default('available') // Changed to string to match DB
+  specialNeeds: z.string().optional(),
+  shelterId: z.number().int().optional().nullable(),
+  ngoId: z.number().int().optional().nullable(),
+  images: z.array(z.string()).default([]),
+  imageUrl: z.string().optional(),
+  adoptionStatus: z.enum(['available', 'pending', 'adopted']).optional(),
+  status: z.string().optional()
 });
 
 // Helper function to send responses
@@ -36,14 +42,17 @@ export async function getPets(req: Request, res: Response) {
     // Handle single pet request
     if (id && typeof id === 'string') {
       const pet = await db.query.pets.findFirst({
-        where: eq(schema.pets.id, id),
-        with: { shelter: true }
+        where: eq(schema.pets.id, parseInt(id)),
+        with: {
+          // Note: This requires relations to be defined in schema
+          // shelter: true 
+        }
       });
 
       if (!pet) {
-        return sendResponse(res, { 
-          error: 'Pet not found', 
-          code: 'PET_NOT_FOUND' 
+        return sendResponse(res, {
+          error: 'Pet not found',
+          code: 'PET_NOT_FOUND'
         }, 404);
       }
 
@@ -59,37 +68,41 @@ export async function getPets(req: Request, res: Response) {
       .select({
         id: schema.pets.id,
         name: schema.pets.name,
-        type: schema.pets.type, // Changed from species to type
+        type: schema.pets.type,
         breed: schema.pets.breed,
         age: schema.pets.age,
         gender: schema.pets.gender,
         size: schema.pets.size,
+        color: schema.pets.color,
         description: schema.pets.description,
-        medical_history: schema.pets.medical_history, // Changed to match DB
-        vaccinated: schema.pets.vaccinated,
+        healthStatus: schema.pets.healthStatus,
+        vaccinationStatus: schema.pets.vaccinationStatus,
         neutered: schema.pets.neutered,
-        adoption_fee: schema.pets.adoption_fee, // Changed to match DB
+        specialNeeds: schema.pets.specialNeeds,
+        adoptionStatus: schema.pets.adoptionStatus,
         status: schema.pets.status,
         images: schema.pets.images,
-        shelter_id: schema.pets.shelter_id, // Changed to match DB
-        created_at: schema.pets.created_at, // Changed to match DB
-        updated_at: schema.pets.updated_at, // Changed to match DB
+        imageUrl: schema.pets.imageUrl,
+        shelterId: schema.pets.shelterId,
+        ngoId: schema.pets.ngoId,
+        createdAt: schema.pets.createdAt,
+        updatedAt: schema.pets.updatedAt,
         shelter: {
-          id: schema.shelters.id,
-          name: schema.shelters.name,
-          type: schema.shelters.type,
-          address: schema.shelters.address,
-          city: schema.shelters.city,
-          phone: schema.shelters.phone,
-          email: schema.shelters.email,
-          website: schema.shelters.website,
-          description: schema.shelters.description,
-          verified: schema.shelters.verified,
-          images: schema.shelters.images
+          id: schema.animalShelters.id,
+          name: schema.animalShelters.name,
+          address: schema.animalShelters.address,
+          city: schema.animalShelters.city,
+          phone: schema.animalShelters.phone,
+          email: schema.animalShelters.email,
+          website: schema.animalShelters.website,
+          description: schema.animalShelters.description,
+          verified: schema.animalShelters.verified,
+          capacity: schema.animalShelters.capacity,
+          currentAnimals: schema.animalShelters.currentAnimals
         }
       })
       .from(schema.pets)
-      .leftJoin(schema.shelters, eq(schema.pets.shelter_id, schema.shelters.id)); // Changed to match DB
+      .leftJoin(schema.animalShelters, eq(schema.pets.shelterId, schema.animalShelters.id));
 
     // Add conditions
     const conditions = [];
@@ -105,24 +118,24 @@ export async function getPets(req: Request, res: Response) {
       );
     }
 
-    if (type && typeof type === 'string') conditions.push(eq(schema.pets.type, type)); // Changed from species to type
+    if (type && typeof type === 'string') conditions.push(eq(schema.pets.type, type));
     if (status && typeof status === 'string') conditions.push(eq(schema.pets.status, status));
-    if (shelter_id && typeof shelter_id === 'string') conditions.push(eq(schema.pets.shelter_id, shelter_id)); // Changed to match DB
+    if (shelter_id && typeof shelter_id === 'string') conditions.push(eq(schema.pets.shelterId, parseInt(shelter_id)));
     if (gender && typeof gender === 'string') conditions.push(eq(schema.pets.gender, gender));
     if (size && typeof size === 'string') conditions.push(eq(schema.pets.size, size));
 
     // Execute the query with conditions
     const results = await query
       .where(conditions.length > 0 ? and(...conditions) : undefined)
-      .orderBy(desc(schema.pets.created_at)) // Changed to match DB
+      .orderBy(desc(schema.pets.createdAt))
       .limit(queryLimit)
       .offset(queryOffset);
 
     return sendResponse(res, results);
   } catch (error) {
     console.error('GET error:', error);
-    return sendResponse(res, { 
-      error: 'Internal server error', 
+    return sendResponse(res, {
+      error: 'Internal server error',
       code: 'INTERNAL_SERVER_ERROR',
       details: error instanceof Error ? error.message : 'Unknown error'
     }, 500);
@@ -133,12 +146,12 @@ export async function getPets(req: Request, res: Response) {
 export async function createPet(req: Request, res: Response) {
   try {
     const body = req.body;
-    
+
     // Validate request body
     const validation = petSchema.safeParse(body);
     if (!validation.success) {
-      return sendResponse(res, { 
-        error: 'Validation failed', 
+      return sendResponse(res, {
+        error: 'Validation failed',
         details: validation.error.errors,
         code: 'VALIDATION_ERROR'
       }, 400);
@@ -147,33 +160,29 @@ export async function createPet(req: Request, res: Response) {
     const data = validation.data;
 
     // Check if shelter exists if provided
-    if (data.shelter_id) { // Changed to match DB
-      const shelter = await db.query.shelters.findFirst({
-        where: eq(schema.shelters.id, data.shelter_id) // Changed to match DB
+    if (data.shelterId) {
+      const shelter = await db.query.animalShelters.findFirst({
+        where: eq(schema.animalShelters.id, data.shelterId)
       });
 
       if (!shelter) {
-        return sendResponse(res, { 
-          error: 'Shelter not found', 
-          code: 'SHELTER_NOT_FOUND' 
+        return sendResponse(res, {
+          error: 'Shelter not found',
+          code: 'SHELTER_NOT_FOUND'
         }, 404);
       }
     }
 
     // Create the pet
     const [newPet] = await db.insert(schema.pets)
-      .values({
-        ...data,
-        created_at: new Date(), // Changed to match DB
-        updated_at: new Date() // Changed to match DB
-      })
+      .values(data)
       .returning();
 
     return sendResponse(res, newPet, 201);
   } catch (error) {
     console.error('POST error:', error);
-    return sendResponse(res, { 
-      error: 'Failed to create pet', 
+    return sendResponse(res, {
+      error: 'Failed to create pet',
       code: 'CREATE_PET_ERROR',
       details: error instanceof Error ? error.message : 'Unknown error'
     }, 500);
@@ -187,17 +196,17 @@ export async function updatePet(req: Request, res: Response) {
     const body = req.body;
 
     if (!id || typeof id !== 'string') {
-      return sendResponse(res, { 
-        error: 'Pet ID is required', 
-        code: 'MISSING_ID' 
+      return sendResponse(res, {
+        error: 'Pet ID is required',
+        code: 'MISSING_ID'
       }, 400);
     }
 
     // Validate request body
     const validation = petSchema.partial().safeParse(body);
     if (!validation.success) {
-      return sendResponse(res, { 
-        error: 'Validation failed', 
+      return sendResponse(res, {
+        error: 'Validation failed',
         details: validation.error.errors,
         code: 'VALIDATION_ERROR'
       }, 400);
@@ -207,30 +216,30 @@ export async function updatePet(req: Request, res: Response) {
 
     // Check if pet exists
     const existingPet = await db.query.pets.findFirst({
-      where: eq(schema.pets.id, id)
+      where: eq(schema.pets.id, parseInt(id))
     });
 
     if (!existingPet) {
-      return sendResponse(res, { 
-        error: 'Pet not found', 
-        code: 'PET_NOT_FOUND' 
+      return sendResponse(res, {
+        error: 'Pet not found',
+        code: 'PET_NOT_FOUND'
       }, 404);
     }
 
     // Check if shelter exists if provided
-    if (data.shelter_id !== undefined) { // Changed to match DB
-      if (data.shelter_id === null) {
-        // Allow setting shelter_id to null
-        data.shelter_id = null;
+    if (data.shelterId !== undefined) {
+      if (data.shelterId === null) {
+        // Allow setting shelterId to null
+        data.shelterId = null;
       } else {
-        const shelter = await db.query.shelters.findFirst({
-          where: eq(schema.shelters.id, data.shelter_id) // Changed to match DB
+        const shelter = await db.query.animalShelters.findFirst({
+          where: eq(schema.animalShelters.id, data.shelterId)
         });
 
         if (!shelter) {
-          return sendResponse(res, { 
-            error: 'Shelter not found', 
-            code: 'SHELTER_NOT_FOUND' 
+          return sendResponse(res, {
+            error: 'Shelter not found',
+            code: 'SHELTER_NOT_FOUND'
           }, 404);
         }
       }
@@ -238,18 +247,15 @@ export async function updatePet(req: Request, res: Response) {
 
     // Update the pet
     const [updatedPet] = await db.update(schema.pets)
-      .set({
-        ...data,
-        updated_at: new Date() // Changed to match DB
-      })
-      .where(eq(schema.pets.id, id))
+      .set(data)
+      .where(eq(schema.pets.id, parseInt(id)))
       .returning();
 
     return sendResponse(res, updatedPet);
   } catch (error) {
     console.error('PATCH error:', error);
-    return sendResponse(res, { 
-      error: 'Failed to update pet', 
+    return sendResponse(res, {
+      error: 'Failed to update pet',
       code: 'UPDATE_PET_ERROR',
       details: error instanceof Error ? error.message : 'Unknown error'
     }, 500);
@@ -262,33 +268,33 @@ export async function deletePet(req: Request, res: Response) {
     const { id } = req.query;
 
     if (!id || typeof id !== 'string') {
-      return sendResponse(res, { 
-        error: 'Pet ID is required', 
-        code: 'MISSING_ID' 
+      return sendResponse(res, {
+        error: 'Pet ID is required',
+        code: 'MISSING_ID'
       }, 400);
     }
 
     // Check if pet exists
     const existingPet = await db.query.pets.findFirst({
-      where: eq(schema.pets.id, id)
+      where: eq(schema.pets.id, parseInt(id))
     });
 
     if (!existingPet) {
-      return sendResponse(res, { 
-        error: 'Pet not found', 
-        code: 'PET_NOT_FOUND' 
+      return sendResponse(res, {
+        error: 'Pet not found',
+        code: 'PET_NOT_FOUND'
       }, 404);
     }
 
     // Delete the pet
     await db.delete(schema.pets)
-      .where(eq(schema.pets.id, id));
+      .where(eq(schema.pets.id, parseInt(id)));
 
     return res.status(204).send(); // 204 No Content
   } catch (error) {
     console.error('DELETE error:', error);
-    return sendResponse(res, { 
-      error: 'Failed to delete pet', 
+    return sendResponse(res, {
+      error: 'Failed to delete pet',
       code: 'DELETE_PET_ERROR',
       details: error instanceof Error ? error.message : 'Unknown error'
     }, 500);

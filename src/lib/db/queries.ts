@@ -1,16 +1,16 @@
 // src/lib/db/queries.ts
 import { db } from '../db';
-import { schema } from '../schema';
+import * as schema from '../../db/schema';
 import { eq, and, or, like, desc } from 'drizzle-orm';
 
 // Shelter queries
 export async function getAllShelters() {
-  return await db.query.shelters.findMany();
+  return await db.query.animalShelters.findMany();
 }
 
 export async function getShelterById(id: string) {
-  return await db.query.shelters.findFirst({
-    where: eq(schema.shelters.id, id)
+  return await db.query.animalShelters.findFirst({
+    where: eq(schema.animalShelters.id, parseInt(id))
   });
 }
 
@@ -19,15 +19,15 @@ export async function getAllPets() {
   return await db
     .select()
     .from(schema.pets)
-    .leftJoin(schema.shelters, eq(schema.pets.shelter_id, schema.shelters.id));
+    .leftJoin(schema.animalShelters, eq(schema.pets.shelterId, schema.animalShelters.id));
 }
 
 export async function getPetById(id: string) {
   const [result] = await db
     .select()
     .from(schema.pets)
-    .leftJoin(schema.shelters, eq(schema.pets.shelter_id, schema.shelters.id))
-    .where(eq(schema.pets.id, id));
+    .leftJoin(schema.animalShelters, eq(schema.pets.shelterId, schema.animalShelters.id))
+    .where(eq(schema.pets.id, parseInt(id)));
   return result;
 }
 
@@ -35,7 +35,7 @@ export async function getPetsByShelter(shelterId: string) {
   return await db
     .select()
     .from(schema.pets)
-    .where(eq(schema.pets.shelter_id, shelterId));
+    .where(eq(schema.pets.shelterId, parseInt(shelterId)));
 }
 
 export async function searchPets(query: string) {
