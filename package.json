@@ -1,9 +1,4 @@
-{
-  "name": "pawrescue",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
+s
     "dev": "concurrently \"tsx src/server.ts\" \"vite\"",
     "dev:frontend": "vite",
     "dev:backend": "tsx src/server.ts",
