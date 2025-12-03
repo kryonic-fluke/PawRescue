@@ -1,7 +1,7 @@
 // src/app/api/ngos/route.ts
 import { Request, Response, Router } from 'express';
 import { db } from '../../../lib/db.js'; 
-import { ngos } from '../../../db/schema';
+import { ngos } from '../../../db/schema.js';
 import { eq, like, or, and, desc } from 'drizzle-orm';
 
 const router = Router();
