@@ -7,9 +7,8 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import aiChatRouter from './app/api/ai-feature/ai-chat.js';
+import apiRouter from './app/api/index.js';  
 
-// Import API routes
-import apiRouter from './app/api';
 import reportsRouter from './app/api/reports.js';
 
 const app = express();
