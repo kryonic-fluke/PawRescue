@@ -1,7 +1,7 @@
 // src/app/api/index.ts
 import express from 'express';
-import { petsHandlers } from './pets/route';
-import ngoRouter from './ngos/route';
+import { petsHandlers } from './pets/route.js';
+import ngoRouter from './ngos/route.js';
 import animalSheltersRouter from './animal-shelters/route';
 
 const router = express.Router();

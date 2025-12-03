@@ -1,6 +1,6 @@
 // src/server.ts
 // CRITICAL: Load environment variables FIRST
-// import './config/env-loader';  <-- COMMENTED OUT FOR VERCEL
+// import './config/env-loader';  
 // Now import everything else AFTER env is loaded
 
 import express from 'express';
