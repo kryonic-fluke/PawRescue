@@ -1,7 +1,7 @@
 // src/lib/db.ts
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import * as schema from '../db/schema';
+import * as schema from '../db/schema.js';
 
 // Environment variables should already be loaded by server.ts or parent module
 console.log('Database URL:', process.env.DATABASE_URL ? '✅ Set' : '❌ Not set');

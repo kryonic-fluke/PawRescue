@@ -3,7 +3,7 @@ import { Pool } from 'pg';
 import { sql } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
-import * as schema from '../db/schema';
+import * as schema from '../db/schema.js';
 
 // Use the TEST_DATABASE_URL from environment or a fallback
 const TEST_DB_URL = process.env.TEST_DATABASE_URL || 
