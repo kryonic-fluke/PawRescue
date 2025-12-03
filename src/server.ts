@@ -48,8 +48,8 @@ app.use('/api/ai-chat', aiChatRouter);
 
 if (process.env.NODE_ENV === 'production') {
   // ESM-safe way to get __dirname
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename)
+  // const __filename = fileURLToPath(import.meta.url);
+  // // const __dirname = path.dirname(__filename)
   
  
   const clientDistPath = path.resolve(process.cwd(), 'dist'); 
