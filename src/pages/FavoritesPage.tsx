@@ -23,7 +23,6 @@ import {
   Mail,
   HeartOff
 } from "lucide-react";
-import AICHatAdvisor from "./AIChatAdvisor";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +35,7 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { useFavorites } from "@/hooks/useFavorites";
 import type { FavoritePet } from "@/hooks/useFavorites";
+import AIChatAdvisor from "./AIChatAdvisor";
 
 // Interface for resource sections
 interface ResourceSection {
@@ -938,7 +938,7 @@ const FavoritesPage = () => {
       </Tabs>
 
       {/* AI Chat Advisor - Only show when pets are selected */}
-     <AICHatAdvisor
+     <AIChatAdvisor
    selectedPets={displayFavorites.filter(pet => selectedForComparison.has(pet.id))} 
 />
 

@@ -1,11 +1,12 @@
 // src/server.ts
 // CRITICAL: Load environment variables FIRST
 // import './config/env-loader';  <-- COMMENTED OUT FOR VERCEL
-import aiChatRouter from './app/api/AI/ai-chat';
 // Now import everything else AFTER env is loaded
+
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import aiChatRouter from './app/api/ai-feature/ai-chat';
 
 // Import API routes
 import apiRouter from './app/api';
@@ -38,7 +39,8 @@ app.get('/health', (_req, res) => {
 // API routes
 app.use('/api', apiRouter);
 app.use('/api/reports', reportsRouter);
-app.use('/api/ai-chat', aiChatRouter);
+app.use('/api/ai-chat', aiChatRouter
+);
 // Serve static files from the React app in production
 if (process.env.NODE_ENV === 'production') {
   // Path to the Vite build output
