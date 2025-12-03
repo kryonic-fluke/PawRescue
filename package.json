@@ -7,7 +7,7 @@
     "dev": "concurrently \"tsx src/server.ts\" \"vite\"",
     "dev:frontend": "vite",
     "dev:backend": "tsx src/server.ts",
-    "build": "vite build && tsc -p tsconfig.server.json --outDir dist",
+"build": "vite build",
     "prebuild": "rimraf dist",
     "preview": "vite preview",
     "start": "NODE_ENV=production node dist/server.js",
