@@ -1,7 +1,7 @@
 // src/app/api/pets/route.ts
 import { Request, Response } from 'express';
-import { db } from '@/lib/db';
-import { schema } from '@/lib/schema';
+import { db } from '../../../lib/db.js'; 
+import { schema } from '../../../lib/schema';
 import { eq, and, or, like, desc, sql } from 'drizzle-orm';
 import { z } from 'zod';
 

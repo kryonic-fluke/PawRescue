@@ -1,11 +1,11 @@
 // src/app/api/ngos/route.ts
 import { Request, Response, Router } from 'express';
-import { db } from '@/db';
-import { ngos } from '@/db/schema';
+import { db } from '../../../lib/db.js'; 
+import { ngos } from '../../../db/schema';
 import { eq, like, or, and, desc } from 'drizzle-orm';
 
 const router = Router();
-
+r
 // GET /api/ngos - Get all NGOs or single NGO by ID
 router.get('/', async (req: Request, res: Response) => {
   try {
@@ -14,9 +14,9 @@ router.get('/', async (req: Request, res: Response) => {
     if (id) {
       const ngoId = parseInt(id as string);
       if (isNaN(ngoId)) {
-        return res.status(400).json({ 
-          error: 'Valid ID is required', 
-          code: 'INVALID_ID' 
+        return res.status(400).json({
+          error: 'Valid ID is required',
+          code: 'INVALID_ID'
         });
       }
 
@@ -27,9 +27,9 @@ router.get('/', async (req: Request, res: Response) => {
         .limit(1);
 
       if (ngo.length === 0) {
-        return res.status(404).json({ 
-          error: 'NGO not found', 
-          code: 'NGO_NOT_FOUND' 
+        return res.status(404).json({
+          error: 'NGO not found',
+          code: 'NGO_NOT_FOUND'
         });
       }
 
@@ -60,25 +60,25 @@ router.get('/', async (req: Request, res: Response) => {
     }
 
     // In your GET /ngos route handler
-let query = db.select().from(ngos).$dynamic();
+    let query = db.select().from(ngos).$dynamic();
 
-// Later when adding conditions:
-if (conditions.length > 0) {
-  query = query.where(and(...conditions));
-}
+    // Later when adding conditions:
+    if (conditions.length > 0) {
+      query = query.where(and(...conditions));
+    }
 
-// Then continue with orderBy, limit, etc.
-const results = await query
-  .orderBy(desc(ngos.rating))
-  .limit(limitNum)
-  .offset(offsetNum);
+    // Then continue with orderBy, limit, etc.
+    const results = await query
+      .orderBy(desc(ngos.rating))
+      .limit(limitNum)
+      .offset(offsetNum);
 
     return res.json(results);
   } catch (error) {
     console.error('GET error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
@@ -121,9 +121,9 @@ router.post('/', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('POST error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
@@ -133,9 +133,9 @@ router.put('/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
-      return res.status(400).json({ 
-        error: 'Valid ID is required', 
-        code: 'INVALID_ID' 
+      return res.status(400).json({
+        error: 'Valid ID is required',
+        code: 'INVALID_ID'
       });
     }
 
@@ -147,9 +147,9 @@ router.put('/:id', async (req: Request, res: Response) => {
       .limit(1);
 
     if (!existing) {
-      return res.status(404).json({ 
-        error: 'NGO not found', 
-        code: 'NGO_NOT_FOUND' 
+      return res.status(404).json({
+        error: 'NGO not found',
+        code: 'NGO_NOT_FOUND'
       });
     }
 
@@ -188,9 +188,9 @@ router.put('/:id', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('PUT error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
@@ -200,9 +200,9 @@ router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
-      return res.status(400).json({ 
-        error: 'Valid ID is required', 
-        code: 'INVALID_ID' 
+      return res.status(400).json({
+        error: 'Valid ID is required',
+        code: 'INVALID_ID'
       });
     }
 
@@ -213,9 +213,9 @@ router.delete('/:id', async (req: Request, res: Response) => {
       .limit(1);
 
     if (!existing) {
-      return res.status(404).json({ 
-        error: 'NGO not found', 
-        code: 'NGO_NOT_FOUND' 
+      return res.status(404).json({
+        error: 'NGO not found',
+        code: 'NGO_NOT_FOUND'
       });
     }
 
@@ -231,9 +231,9 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('DELETE error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });

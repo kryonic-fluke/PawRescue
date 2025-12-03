@@ -1,10 +1,10 @@
 // src/app/api/animal-shelters/route.ts
 import { Request, Response, Router } from 'express';
-import { db } from '@/db';
-import { animalShelters } from '@/db/schema';
+import { db } from '../../../lib/db.js';
 import { eq, like, or, and, desc, gt } from 'drizzle-orm';
+import { animalShelters } from '../../../db/schema';
 
-const router = Router();
+const router = Router();  
 
 // GET /api/animal-shelters - Get all shelters or single shelter by ID
 router.get('/', async (req: Request, res: Response) => {
@@ -14,9 +14,9 @@ router.get('/', async (req: Request, res: Response) => {
     if (id) {
       const shelterId = parseInt(id as string);
       if (isNaN(shelterId)) {
-        return res.status(400).json({ 
-          error: 'Valid ID is required', 
-          code: 'INVALID_ID' 
+        return res.status(400).json({
+          error: 'Valid ID is required',
+          code: 'INVALID_ID'
         });
       }
 
@@ -27,9 +27,9 @@ router.get('/', async (req: Request, res: Response) => {
         .limit(1);
 
       if (!shelter) {
-        return res.status(404).json({ 
-          error: 'Shelter not found', 
-          code: 'SHELTER_NOT_FOUND' 
+        return res.status(404).json({
+          error: 'Shelter not found',
+          code: 'SHELTER_NOT_FOUND'
         });
       }
 
@@ -76,9 +76,9 @@ router.get('/', async (req: Request, res: Response) => {
     return res.json(results);
   } catch (error) {
     console.error('GET error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
@@ -132,9 +132,9 @@ router.post('/', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('POST error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
@@ -144,9 +144,9 @@ router.put('/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
-      return res.status(400).json({ 
-        error: 'Valid ID is required', 
-        code: 'INVALID_ID' 
+      return res.status(400).json({
+        error: 'Valid ID is required',
+        code: 'INVALID_ID'
       });
     }
 
@@ -158,9 +158,9 @@ router.put('/:id', async (req: Request, res: Response) => {
       .limit(1);
 
     if (!existing) {
-      return res.status(404).json({ 
-        error: 'Shelter not found', 
-        code: 'SHELTER_NOT_FOUND' 
+      return res.status(404).json({
+        error: 'Shelter not found',
+        code: 'SHELTER_NOT_FOUND'
       });
     }
 
@@ -200,9 +200,9 @@ router.put('/:id', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('PUT error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
@@ -212,9 +212,9 @@ router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) {
-      return res.status(400).json({ 
-        error: 'Valid ID is required', 
-        code: 'INVALID_ID' 
+      return res.status(400).json({
+        error: 'Valid ID is required',
+        code: 'INVALID_ID'
       });
     }
 
@@ -225,9 +225,9 @@ router.delete('/:id', async (req: Request, res: Response) => {
       .limit(1);
 
     if (!existing) {
-      return res.status(404).json({ 
-        error: 'Shelter not found', 
-        code: 'SHELTER_NOT_FOUND' 
+      return res.status(404).json({
+        error: 'Shelter not found',
+        code: 'SHELTER_NOT_FOUND'
       });
     }
 
@@ -243,9 +243,9 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
   } catch (error) {
     console.error('DELETE error:', error);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Internal server error',
-      message: (error as Error).message 
+      message: (error as Error).message
     });
   }
 });
