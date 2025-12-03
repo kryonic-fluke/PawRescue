@@ -2,7 +2,7 @@
 import { Request, Response, Router } from 'express';
 import { db } from '../../../lib/db.js';
 import { eq, like, or, and, desc, gt } from 'drizzle-orm';
-import { animalShelters } from '../../../db/schema';
+import { animalShelters } from '../../../db/schema.js';
 
 const router = Router();  
 
